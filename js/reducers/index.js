@@ -22,15 +22,15 @@ function checkUserGuess(guess, target, userGuesses){
     }
 
     if(guess == target){
-      return {prompt: `Correct, you won! The target number was indeed, ${target}!`, classType: 'success'};
+      return {prompt: `Correct! The target number was indeed, ${target}!`, classType: 'success'};
     }
 
     for (let key in thresholds) {
       if ( target - thresholds[key] <= guess && guess <= target + thresholds[key] ) {
-        return {prompt: `You are currently: ${key}`, classType: key.toLowerCase()};
+        return {prompt: `${key}`, classType: key.toLowerCase()};
       }
     }
-    return {prompt: 'You are currently: Freezing', classType: 'freezing'};
+    return {prompt: 'Freezing', classType: 'freezing'};
 }
 
 export const gameReducer = (state=initialState, action) => {
