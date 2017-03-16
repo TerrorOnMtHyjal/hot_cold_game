@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { processUserGuess, processUserInput } from '../actions/index';
+import { processUserGuess, processUserInput, fetchScoreboard } from '../actions/index';
 
 function preventAndDispatch(e, props){
   e.preventDefault();
-  props.dispatch(processUserGuess(props.userInput))
+  props.dispatch(processUserGuess(props.userInput));
+  if (props.target == props.userInput) {
+     props.dispatch(fetchScoreboard());
+  }
 }
 
 export function GuessInput(props){
@@ -21,7 +24,8 @@ export function GuessInput(props){
 }
 
 const mapStateToProps = (state, props) => ({
-  userInput : state.userInput
+  userInput : state.userInput,
+  target: state.targetNumber
 });
 
 export default connect(mapStateToProps)(GuessInput);
