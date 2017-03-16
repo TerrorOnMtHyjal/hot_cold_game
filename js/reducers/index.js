@@ -59,9 +59,10 @@ export const gameReducer = (state=initialState, action) => {
         return {...state, modal: !state.modal};
 //---------------------------------------------------------------------------------//
       case actions.FETCH_SCOREBOARD_SUCCESS:
-        console.log(action.scoreboard);
         return {...state, scoreboard: action.scoreboard}
 //---------------------------------------------------------------------------------//
+      case actions.POST_USER_SCORE_SUCCESS:
+        return {...state, scoreboard: action.scoreboard};
       default:
         return state;
     }
