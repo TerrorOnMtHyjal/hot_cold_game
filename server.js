@@ -10,23 +10,23 @@ app.use((req, res, next) => {
     next();
 });
 
-let guessCountArray = [];
+let scoreboard = [{user: "Mousecop", count: 20}, {user: "Jared", count: 10}, {user: "Joe", count: 2}];
 let lowestGuessCount = 0;
 
 
 app.get('/api/guesses', (req, res) => {
-  res.json({guessCountArray, lowestGuessCount});
+  res.json({scoreboard});
 });
 
 app.post('/api/guesses', jsonParser, (req, res) => {
   let newGuessCount = req.body.newGuessCount;
-  guessCountArray.push(newGuessCount);
+  scoreboard.push(newGuessCount);
 
   if(lowestGuessCount === 0 || newGuessCount.count < lowestGuessCount){
     lowestGuessCount = newGuessCount.count;
   }
 
-  res.json({lowestGuessCount});
+  res.json({scoreboard});
 });
 
 app.listen(8081, () => {

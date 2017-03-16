@@ -1,16 +1,38 @@
-//actions needed
-//generate a new random number and hot and cold deviations from that number
-//(ex: num 40, hot is 30-50, cold is outside of that range)
-//user inputs guess and check to see if correct
-//----save user guess
-//----check to see if guess is correct
-//--------if correct, prompt user
-//--------if incorrect, add number to guess list and prompt for new guess
-
+//import {connect} from 'react-redux';
 export const GENERATE_NEW_GAME = 'GENERATE_NEW_GAME';
 export const PROCESS_USER_GUESS = 'PROCESS_USER_GUESS';
 export const CHANGE_MODAL_STATE = 'CHANGE_MODAL_STATE';
 export const PROCESS_USER_INPUT = 'PROCESS_USER_INPUT';
+export const FETCH_SCOREBOARD = 'FETCH_SCOREBOARD'
+export const FETCH_SCOREBOARD_SUCCESS = 'FETCH_SCOREBOARD_SUCCESS';
+export const FETCH_SCOREBOARD_ERROR = 'FETCH_SCOREBOARD_ERROR';
+
+export const fetchScoreboard = () => dispatch => {
+    const url = new URL('http://localhost:8081/api/guesses');
+
+    return fetch(url).then(response => {
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+        return response.json();
+    }).then(scoreboard => {
+        return dispatch(
+            fetchScoreboardSuccess(scoreboard.scoreboard)
+        );
+    }).catch(error =>
+        dispatch(fetchScoreboardError(error))
+    );
+}
+
+export const fetchScoreboardSuccess = (scoreboard) => ({
+  type: FETCH_SCOREBOARD_SUCCESS,
+  scoreboard
+});
+
+export const fetchScoreboardError = (error) => ({
+  type: FETCH_SCOREBOARD_ERROR,
+  error
+});
 
 export const generateNewGame = () => ({
   type: GENERATE_NEW_GAME
