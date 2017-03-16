@@ -25,7 +25,6 @@ function checkUserGuess(guess, target, userGuesses){
     }
 
     if(guess == target){
-      
       return {prompt: `Correct! The target number was indeed, ${target}!`, classType: 'success', completedGame: true};
     }
 

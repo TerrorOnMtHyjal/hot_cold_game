@@ -7,7 +7,10 @@ export function Scoreboard(props) {
     <div>
       <h3>Leaderboard</h3>
       <ul>{props.scoreboard.map(score => <li>{score.user}{score.count}</li>)}</ul>
-      <button>Add My Score</button>
+      <form onSubmit="#">
+        <input type="text" placeholder="What's ya name bub?"/>
+        <input type="submit" value="Submit my score!"/>
+      </form>
     </div>
   );
 }
