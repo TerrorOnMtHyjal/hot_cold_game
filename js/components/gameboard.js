@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import GuessContainer from './guessContainer';
 import { generateNewGame, changeModalState } from '../actions/index';
+import GuessContainer from './guessContainer';
 import Modal from './modal'
+
 export function Gameboard(props){
   const modalValue = props.modal ? <Modal /> : undefined;
   return (

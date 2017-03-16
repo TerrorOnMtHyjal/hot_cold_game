@@ -27,7 +27,7 @@ function checkUserGuess(guess, target, userGuesses){
 
     for (let key in thresholds) {
       if ( target - thresholds[key] <= guess && guess <= target + thresholds[key] ) {
-        return {prompt: `${key}`, classType: key.toLowerCase()};
+        return {prompt: key, classType: key.toLowerCase()};
       }
     }
     return {prompt: 'Freezing', classType: 'freezing'};
