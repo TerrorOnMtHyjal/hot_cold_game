@@ -19,12 +19,9 @@ app.get('/api/guesses', (req, res) => {
 });
 
 app.post('/api/guesses', jsonParser, (req, res) => {
-  let newGuessCount = req.body.newGuessCount;
-  scoreboard.push(newGuessCount);
-
-  if(lowestGuessCount === 0 || newGuessCount.count < lowestGuessCount){
-    lowestGuessCount = newGuessCount.count;
-  }
+  let newGuess = req.body;
+  scoreboard.push(newGuess);
+  
 
   res.json({scoreboard});
 });
